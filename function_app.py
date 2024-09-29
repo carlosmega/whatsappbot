@@ -6,17 +6,23 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 def send_whatsapp_message(phone_number, message):
     from playwright.sync_api import sync_playwright
     import time
+    import os
+
+    user_data_dir = "whatsapp_data"
+    if not os.path.exists(user_data_dir):
+        os.makedirs(user_data_dir)
+        logging.info(f"Directorio '{user_data_dir}' creado.")
 
     try:
         with sync_playwright() as p:
             try:
                 
-                browser = p.chromium.launch_persistent_context(user_data_dir="whatsapp_data", headless=False)
+                browser = p.chromium.launch_persistent_context(user_data_dir=user_data_dir, headless=False)
             except Exception as e:
                 logging.error(f"Error launching browser: {e}")
                 logging.info("Attempting to install Playwright browsers...")
                 
-                browser = p.chromium.launch_persistent_context(user_data_dir="whatsapp_data", headless=False)
+                browser = p.chromium.launch_persistent_context(user_data_dir=user_data_dir, headless=False)
 
             page = browser.new_page()
             whatsapp_url = f"https://web.whatsapp.com/send?phone={phone_number}&text={message}"
