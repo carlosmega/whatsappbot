@@ -59,6 +59,11 @@ jobs:
       run: |
         python -m pip install playwright
 
+    - name: Install Playwright Deps
+      shell: bash
+      run: |
+        python -m playwright install --with-deps
+
     - name: Install Playwright Browsers
       shell: bash
       run: |
