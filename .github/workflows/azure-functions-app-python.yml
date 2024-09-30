@@ -59,16 +59,10 @@ jobs:
       run: |
         python -m pip install playwright
 
-    - name: Download Playwright Browsers
+    - name: Install Playwright Browsers
       shell: bash
       run: |
-        npx playwright install
-
-    - name: Verify Playwright Installation
-      shell: bash
-      run: |
-        npx playwright --version
-        npx playwright install --with-deps
+        playwright install
 
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
