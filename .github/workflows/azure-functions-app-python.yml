@@ -67,7 +67,7 @@ jobs:
     - name: Install Playwright Browsers
       shell: bash
       run: |
-        playwright install
+        playwright install chromium
 
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
