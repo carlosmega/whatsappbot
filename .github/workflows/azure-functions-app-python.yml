@@ -63,10 +63,6 @@ jobs:
       shell: bash
       run: |
         playwright install chromium
-
-    - name: List installed browsers
-      run: |
-        ls -lah /home/.cache/ms-playwright/
         
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
@@ -77,4 +73,8 @@ jobs:
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
         scm-do-build-during-deployment: true
         enable-oryx-build: true
+
+    - name: List installed browsers
+      run: |
+        ls -lah /home/.cache/ms-playwright/
 
